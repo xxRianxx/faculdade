@@ -1,20 +1,28 @@
 package com.rian.faculdade.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.rian.faculdade.Dtos.UsuarioDTO;
+import jakarta.persistence.*;
+import org.springframework.beans.BeanUtils;
+
+import java.util.Objects;
 
 @Entity
+@Table(name = "USUARIO")
 public class UsuarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
     private String senha;
+    @Column(nullable = false)
     private String status;
+
+
 
     public String getEmail(){
         return email;
@@ -36,5 +44,24 @@ public class UsuarioModel {
     }
     public void setStatus(String status){
         this.status = status;
+    }
+
+    public UsuarioModel(UsuarioDTO usuario){
+        BeanUtils.copyProperties(usuario,this);
+    }
+
+    public UsuarioModel(){}
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        UsuarioModel that = (UsuarioModel) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

@@ -1,31 +1,42 @@
 package com.rian.faculdade.service;
 
 
+import com.rian.faculdade.Dtos.UsuarioDTO;
 import com.rian.faculdade.model.UsuarioModel;
 import com.rian.faculdade.repository.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UsuarioService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+   private UsuarioRepository usuarioRepository;
 
-    // cadastrar um usuário
-    public UsuarioModel cadastrarUsuario(UsuarioModel usuario){
-        Optional<UsuarioModel> existente = usuarioRepository.findByEmail(usuario.getEmail());
-        if(existente.isPresent()){
-            throw new RuntimeException("Email já cadastrado!");
-        }
-        return usuarioRepository.save(usuario);
+    public List<UsuarioDTO> listarTodos(){
+       List<UsuarioModel> usuarios = usuarioRepository.findAll();
+       return usuarios.stream().map(UsuarioDTO::new).toList();
     }
 
-    // login de um usuário
-    public UsuarioModel login(String email, String senha){
-        Optional<UsuarioModel> usuario = usuarioRepository.findByEmailAndSenha(email,senha);
-        return usuario.orElseThrow(()-> new RuntimeException("Email ou senha icorretos!"));
+    public void inserir(UsuarioDTO usuario) {
+        UsuarioModel usuarioModel = new UsuarioModel(usuario);
+
+        usuarioRepository.save(usuarioModel);
+    }
+
+    public UsuarioDTO alterar(UsuarioDTO usuario){
+        UsuarioModel usuarioModel = new UsuarioModel(usuario);
+        return new UsuarioDTO(usuarioRepository.save(usuarioModel));
+    }
+public UsuarioDTO buscarPorId(Long id){
+       return new UsuarioDTO(usuarioRepository.findById(id).get());
+}
+    public void excluir(Long id){
+        UsuarioModel usuario = usuarioRepository.findById(id).get();
+        usuarioRepository.delete(usuario);
     }
 }
