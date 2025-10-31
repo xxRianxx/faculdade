@@ -1,7 +1,6 @@
 package com.rian.faculdade.Dtos;
 
 import com.rian.faculdade.model.UsuarioModel;
-import jakarta.persistence.Column;
 import org.springframework.beans.BeanUtils;
 
 public class UsuarioDTO {
@@ -11,11 +10,13 @@ public class UsuarioDTO {
     private String senha;
     private String status;
 
-
-    public UsuarioDTO(UsuarioModel usuario){
-        BeanUtils.copyProperties(usuario,this);
+    public UsuarioDTO(UsuarioModel usuario) {
+        BeanUtils.copyProperties(usuario, this);
     }
-    public UsuarioDTO() {}
+
+    public UsuarioDTO() {
+    }
+
     public long getId() {
         return id;
     }

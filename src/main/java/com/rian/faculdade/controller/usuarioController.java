@@ -13,22 +13,24 @@ import java.util.List;
 public class usuarioController {
     @Autowired
     private UsuarioService usuarioService;
+
     @GetMapping
-    public List<UsuarioDTO> listarTodos(){
+    public List<UsuarioDTO> listarTodos() {
         return usuarioService.listarTodos();
     }
 
     @PostMapping
-    public void inserir(@RequestBody UsuarioDTO usuario){
+    public void inserir(@RequestBody UsuarioDTO usuario) {
         usuarioService.inserir(usuario);
     }
 
     @PutMapping
-    public UsuarioDTO alterar(@RequestBody UsuarioDTO usuario){
+    public UsuarioDTO alterar(@RequestBody UsuarioDTO usuario) {
         return usuarioService.alterar(usuario);
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable("id")Long id){
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
         usuarioService.excluir(id);
         return ResponseEntity.ok().build();
     }

@@ -1,35 +1,29 @@
-package com.rian.faculdade.model;
+package com.rian.faculdade.Dtos;
 
-import com.rian.faculdade.Dtos.PessoaDTO;
+import com.rian.faculdade.model.EnderecoModel;
+import com.rian.faculdade.model.PessoaModel;
+import com.rian.faculdade.model.UsuarioModel;
 import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
-import java.util.Objects;
 
-@Entity
-public class PessoaModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PessoaDTO {
     private long id;
-    @Column(nullable = false)
+
     private String nome;
-    @Column(nullable = false, unique = true)
+
     private String cpf;
-    @Column(nullable = false)
+
     private Date dataNascimento;
-    @OneToOne
-    @JoinColumn(name = "usuario")
+
     private UsuarioModel usuario;
-    @OneToOne
-    @JoinColumn(name = "endereco")
     private EnderecoModel endereco;
 
-    public PessoaModel() {
+    public PessoaDTO() {
     }
 
-    public PessoaModel(PessoaDTO pessoa) {
+    public PessoaDTO(PessoaModel pessoa) {
         BeanUtils.copyProperties(pessoa, this);
     }
 
@@ -67,17 +61,5 @@ public class PessoaModel {
 
     public void setEndereco(EnderecoModel endereco) {
         this.endereco = endereco;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        PessoaModel that = (PessoaModel) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 }

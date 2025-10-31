@@ -12,7 +12,7 @@ public class ProfessorModel {
     @JoinColumn(name = "id_pessoa")
     private PessoaModel pessoa;
 
-    public PessoaModel getPessoa(){
+    public PessoaModel getPessoa() {
         return pessoa;
     }
 }

@@ -1,6 +1,5 @@
 package com.rian.faculdade.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,42 +17,52 @@ public class EnderecoModel {
     private String estado;
     private String bairro;
 
-    public String getLogradouro(){
-    return logradouro;
+    public String getLogradouro() {
+        return logradouro;
     }
-    public String getCidade(){
+
+    public String getCidade() {
         return cidade;
 
     }
-    public int getNumero(){
+
+    public int getNumero() {
         return numero;
     }
-    public String getComplemento(){
+
+    public String getComplemento() {
         return complemento;
     }
-    public String getEstado(){
+
+    public String getEstado() {
         return estado;
     }
-    public String getBairro(){
+
+    public String getBairro() {
         return bairro;
     }
 
-    public void setLogradouro(String logradouro){
+    public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }
-    public void setCidade(String cidade){
+
+    public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-    public void setNumero(int numero){
+
+    public void setNumero(int numero) {
         this.numero = numero;
     }
-    public void setComplemento(String complemento){
+
+    public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-    public void setEstado(String estado){
+
+    public void setEstado(String estado) {
         this.estado = estado;
     }
-    public void setBairro(String bairro){
+
+    public void setBairro(String bairro) {
         this.bairro = bairro;
     }
 

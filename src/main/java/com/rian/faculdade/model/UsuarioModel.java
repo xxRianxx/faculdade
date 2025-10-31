@@ -1,6 +1,5 @@
 package com.rian.faculdade.model;
 
-
 import com.rian.faculdade.Dtos.UsuarioDTO;
 import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
@@ -22,9 +21,7 @@ public class UsuarioModel {
     @Column(nullable = false)
     private String status;
 
-
-
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
@@ -32,26 +29,28 @@ public class UsuarioModel {
         return senha;
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return status;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
     }
-    public void setSenha(String senha){
+
+    public void setSenha(String senha) {
         this.senha = senha;
     }
-    public void setStatus(String status){
+
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public UsuarioModel(UsuarioDTO usuario){
-        BeanUtils.copyProperties(usuario,this);
+    public UsuarioModel(UsuarioDTO usuario) {
+        BeanUtils.copyProperties(usuario, this);
     }
 
-    public UsuarioModel(){}
-
+    public UsuarioModel() {
+    }
 
     @Override
     public boolean equals(Object o) {
