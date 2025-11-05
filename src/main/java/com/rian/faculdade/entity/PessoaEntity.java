@@ -1,4 +1,4 @@
-package com.rian.faculdade.model;
+package com.rian.faculdade.entity;
 
 import com.rian.faculdade.Dtos.PessoaDTO;
 import jakarta.persistence.*;

@@ -1,6 +1,6 @@
 package com.rian.faculdade.Dtos;
 
-import com.rian.faculdade.model.UsuarioEntity;
+import com.rian.faculdade.entity.UsuarioEntity;
 import org.springframework.beans.BeanUtils;
 
 public class UsuarioDTO {

@@ -1,6 +1,6 @@
 package com.rian.faculdade.repository;
 
-import com.rian.faculdade.model.PessoaEntity;
+import com.rian.faculdade.entity.PessoaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
