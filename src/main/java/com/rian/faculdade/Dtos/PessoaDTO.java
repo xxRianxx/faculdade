@@ -1,64 +1,56 @@
 package com.rian.faculdade.Dtos;
 
-import com.rian.faculdade.entity.EnderecoEntity;
-import com.rian.faculdade.entity.PessoaEntity;
-import com.rian.faculdade.entity.UsuarioEntity;
-import org.springframework.beans.BeanUtils;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PessoaDTO {
-    private long id;
 
     private String nome;
-
     private String cpf;
-
-    private Date dataNascimento;
-
-    private UsuarioEntity usuario;
-    private EnderecoEntity endereco;
+    private LocalDate dataNascimento;
+    private UsuarioCreateDTO usuario;
+    private EnderecoDTO endereco;
 
     public PessoaDTO() {
     }
 
-    public PessoaDTO(PessoaEntity pessoa) {
-        BeanUtils.copyProperties(pessoa, this);
-    }
-
+    // Getters e Setters
     public String getNome() {
         return nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public UsuarioEntity getUsuario() {
-        return usuario;
-    }
-
-    public EnderecoEntity getEndereco() {
-        return endereco;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public void setEndereco(EnderecoEntity endereco) {
+    public UsuarioCreateDTO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioCreateDTO usuario) {
+        this.usuario = usuario;
+    }
+
+    public EnderecoDTO getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDTO endereco) {
         this.endereco = endereco;
     }
 }

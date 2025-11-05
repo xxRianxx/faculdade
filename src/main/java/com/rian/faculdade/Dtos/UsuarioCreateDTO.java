@@ -1,20 +1,28 @@
 package com.rian.faculdade.Dtos;
 
 import com.rian.faculdade.entity.UsuarioEntity;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
 
-public class UsuarioDTO {
+public class UsuarioCreateDTO {
 
-    private long id;
+    @NotBlank
+    @Email
     private String email;
+    @NotBlank
+    @Size(min = 6)
     private String senha;
+    @NotBlank
     private String status;
+    private long id;
 
-    public UsuarioDTO(UsuarioEntity usuario) {
+    public UsuarioCreateDTO(UsuarioEntity usuario) {
         BeanUtils.copyProperties(usuario, this);
     }
 
-    public UsuarioDTO() {
+    public UsuarioCreateDTO() {
     }
 
     public long getId() {

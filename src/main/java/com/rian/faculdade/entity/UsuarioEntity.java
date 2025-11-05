@@ -1,66 +1,65 @@
 package com.rian.faculdade.entity;
 
-import com.rian.faculdade.Dtos.UsuarioDTO;
 import jakarta.persistence.*;
-import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "usuario")
 public class UsuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String email;
+
     @Column(nullable = false)
     private String senha;
-    @Column(nullable = false)
+
+    @Column(nullable = false, columnDefinition = "varchar(20) default 'ATIVO'")
     private String status;
+
+    // Getters e setters
+    public Long getId() {
+        return id;
+    }
 
     public String getEmail() {
         return email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public UsuarioEntity(UsuarioDTO usuario) {
-        BeanUtils.copyProperties(usuario, this);
-    }
-
-    public UsuarioEntity() {
-    }
-
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) return true;
+        if (!(o instanceof UsuarioEntity)) return false;
         UsuarioEntity that = (UsuarioEntity) o;
-        return id == that.id;
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id);
     }
 }

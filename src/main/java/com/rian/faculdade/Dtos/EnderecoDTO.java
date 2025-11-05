@@ -1,28 +1,12 @@
-package com.rian.faculdade.entity;
+package com.rian.faculdade.Dtos;
 
-import jakarta.persistence.*;
-
-import java.util.Objects;
-
-@Entity
-@Table(name = "endereco")
-public class EnderecoEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class EnderecoDTO {
     private String logradouro;
     private String cidade;
     private int numero;
     private String complemento;
     private String estado;
     private String bairro;
-
-    // Getters e setters
-    public Long getId() {
-        return id;
-    }
 
     public String getLogradouro() {
         return logradouro;
@@ -70,17 +54,5 @@ public class EnderecoEntity {
 
     public void setBairro(String bairro) {
         this.bairro = bairro;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        EnderecoEntity that = (EnderecoEntity) o;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }
