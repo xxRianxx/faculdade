@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class PessoaModel {
+public class PessoaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,15 +21,15 @@ public class PessoaModel {
     private Date dataNascimento;
     @OneToOne
     @JoinColumn(name = "usuario")
-    private UsuarioModel usuario;
+    private UsuarioEntity usuario;
     @OneToOne
     @JoinColumn(name = "endereco")
-    private EnderecoModel endereco;
+    private EnderecoEntity endereco;
 
-    public PessoaModel() {
+    public PessoaEntity() {
     }
 
-    public PessoaModel(PessoaDTO pessoa) {
+    public PessoaEntity(PessoaDTO pessoa) {
         BeanUtils.copyProperties(pessoa, this);
     }
 
@@ -45,11 +45,11 @@ public class PessoaModel {
         return dataNascimento;
     }
 
-    public UsuarioModel getUsuario() {
+    public UsuarioEntity getUsuario() {
         return usuario;
     }
 
-    public EnderecoModel getEndereco() {
+    public EnderecoEntity getEndereco() {
         return endereco;
     }
 
@@ -65,14 +65,14 @@ public class PessoaModel {
         this.dataNascimento = dataNascimento;
     }
 
-    public void setEndereco(EnderecoModel endereco) {
+    public void setEndereco(EnderecoEntity endereco) {
         this.endereco = endereco;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        PessoaModel that = (PessoaModel) o;
+        PessoaEntity that = (PessoaEntity) o;
         return id == that.id;
     }
 

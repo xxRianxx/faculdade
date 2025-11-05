@@ -3,16 +3,25 @@ package com.rian.faculdade.model;
 import jakarta.persistence.*;
 
 @Entity
-public class ProfessorModel {
+public class AlunoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToOne
     @JoinColumn(name = "id_pessoa")
-    private PessoaModel pessoa;
+    private PessoaEntity pessoa;
+    private int ra;
 
-    public PessoaModel getPessoa() {
+    public PessoaEntity getPessoa() {
         return pessoa;
+    }
+
+    public int getRa() {
+        return ra;
+    }
+
+    public void setRa(int ra) {
+        this.ra = ra;
     }
 }

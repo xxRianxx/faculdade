@@ -3,27 +3,27 @@ package com.rian.faculdade.model;
 import jakarta.persistence.*;
 
 @Entity
-public class PerfilUsuarioModel {
+public class PerfilUsuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
     @JoinColumn(name = "id_perfil")
-    private PerfilModel perfil;
+    private PerfilEntity perfil;
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private UsuarioModel usuario;
+    private UsuarioEntity usuario;
 
-    public PerfilModel getPerfil() {
+    public PerfilEntity getPerfil() {
         return perfil;
     }
 
-    public UsuarioModel getUsuario() {
+    public UsuarioEntity getUsuario() {
         return usuario;
     }
 
-    public void setPerfil(PerfilModel perfil) {
+    public void setPerfil(PerfilEntity perfil) {
         this.perfil = perfil;
     }
 

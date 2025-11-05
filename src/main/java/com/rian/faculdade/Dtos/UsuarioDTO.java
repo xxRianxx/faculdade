@@ -1,6 +1,6 @@
 package com.rian.faculdade.Dtos;
 
-import com.rian.faculdade.model.UsuarioModel;
+import com.rian.faculdade.model.UsuarioEntity;
 import org.springframework.beans.BeanUtils;
 
 public class UsuarioDTO {
@@ -10,7 +10,7 @@ public class UsuarioDTO {
     private String senha;
     private String status;
 
-    public UsuarioDTO(UsuarioModel usuario) {
+    public UsuarioDTO(UsuarioEntity usuario) {
         BeanUtils.copyProperties(usuario, this);
     }
 

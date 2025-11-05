@@ -1,9 +1,8 @@
 package com.rian.faculdade.Dtos;
 
-import com.rian.faculdade.model.EnderecoModel;
-import com.rian.faculdade.model.PessoaModel;
-import com.rian.faculdade.model.UsuarioModel;
-import jakarta.persistence.*;
+import com.rian.faculdade.model.EnderecoEntity;
+import com.rian.faculdade.model.PessoaEntity;
+import com.rian.faculdade.model.UsuarioEntity;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
@@ -17,13 +16,13 @@ public class PessoaDTO {
 
     private Date dataNascimento;
 
-    private UsuarioModel usuario;
-    private EnderecoModel endereco;
+    private UsuarioEntity usuario;
+    private EnderecoEntity endereco;
 
     public PessoaDTO() {
     }
 
-    public PessoaDTO(PessoaModel pessoa) {
+    public PessoaDTO(PessoaEntity pessoa) {
         BeanUtils.copyProperties(pessoa, this);
     }
 
@@ -39,11 +38,11 @@ public class PessoaDTO {
         return dataNascimento;
     }
 
-    public UsuarioModel getUsuario() {
+    public UsuarioEntity getUsuario() {
         return usuario;
     }
 
-    public EnderecoModel getEndereco() {
+    public EnderecoEntity getEndereco() {
         return endereco;
     }
 
@@ -59,7 +58,7 @@ public class PessoaDTO {
         this.dataNascimento = dataNascimento;
     }
 
-    public void setEndereco(EnderecoModel endereco) {
+    public void setEndereco(EnderecoEntity endereco) {
         this.endereco = endereco;
     }
 }
