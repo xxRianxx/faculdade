@@ -10,12 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/alunos")
 public class AlunoController {
 
-    private final AlunoService alunoService;
-
-    // Injeção via construtor
-    public AlunoController(AlunoService alunoService) {
-        this.alunoService = alunoService;
-    }
+    private AlunoService alunoService;
 
     // Endpoint para cadastrar aluno
     @PostMapping
