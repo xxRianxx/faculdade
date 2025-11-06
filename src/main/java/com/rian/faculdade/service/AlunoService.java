@@ -23,10 +23,15 @@ public class AlunoService {
 
     @Transactional
     public AlunoDTO create(AlunoCreateDTO dto) {
-        // Cria a pessoa (PessoaService cuida do endereço e validações)
+        // Verifica ou cria pessoa
         PessoaEntity pessoa = pessoaService.create(dto.getPessoa());
 
-        // Cria usuário
+        // Verifica se já existe um aluno com essa pessoa
+        if (alunoRepo.findByPessoaId(pessoa.getId()).isPresent()) {
+            throw new RuntimeException("Esta pessoa já está cadastrada como aluno.");
+        }
+
+        // Cria o usuário
         UsuarioEntity usuario = usuarioService.create(dto.getUsuario());
 
         // Cria aluno
@@ -35,10 +40,8 @@ public class AlunoService {
         aluno.setUsuario(usuario);
         aluno.setRa(generateRa());
 
-        // Salva aluno (cascade salva usuário se configurado na entidade)
+        // Salva e retorna DTO
         AlunoEntity saved = alunoRepo.save(aluno);
-
-        // Retorna DTO
         return mapperToDto(saved);
     }
 

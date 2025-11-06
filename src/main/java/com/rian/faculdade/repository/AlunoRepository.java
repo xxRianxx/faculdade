@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface AlunoRepository extends JpaRepository<AlunoEntity, Long> {
 
     Optional<AlunoEntity> findByRa(String ra);
+
+    Optional<AlunoEntity> findByPessoaId(Long pessoaId);
+
 }

@@ -23,26 +23,33 @@ public class PessoaService {
 
     @Transactional
     public PessoaEntity create(PessoaDTO pessoaDTO) {
-        // Validação datas no futuro
+        // Validação de data
         if (pessoaDTO.getDataNascimento().isAfter(LocalDate.now())) {
             throw new BusinessException("Data de nascimento inválida.");
         }
-        // validação de cfp valido.
+
+        // Validação de CPF
         if (!CpfUtils.isValid(pessoaDTO.getCpf())) {
             throw new BusinessException("CPF inválido.");
         }
 
-        //  Cria o endereço (chama a EnderecoService)
+        // Verifica se a pessoa já existe
+        var existingPessoa = pessoaRepository.findByCpf(pessoaDTO.getCpf());
+        if (existingPessoa.isPresent()) {
+            return existingPessoa.get(); // reaproveita a pessoa existente
+        }
+
+        // Cria o endereço
         EnderecoEntity endereco = enderecoService.create(pessoaDTO.getEndereco());
 
-        //  Cria a pessoa
+        // Cria nova pessoa
         PessoaEntity pessoa = new PessoaEntity();
         pessoa.setNome(pessoaDTO.getNome());
         pessoa.setCpf(pessoaDTO.getCpf());
         pessoa.setDataNascimento(pessoaDTO.getDataNascimento());
         pessoa.setEndereco(endereco);
 
-        // 4. Salva no banco
         return pessoaRepository.save(pessoa);
     }
+
 }
