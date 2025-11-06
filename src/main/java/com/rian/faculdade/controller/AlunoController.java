@@ -24,9 +24,11 @@ public class AlunoController {
         return ResponseEntity.ok(novoAluno);
     }
 
-    // Endpoint para buscar por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<AlunoDTO> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(new AlunoDTO());
+    // Endpoint para buscar por RA
+    @GetMapping("/ra/{ra}")
+    public ResponseEntity<AlunoDTO> findById(@PathVariable String ra) {
+        AlunoDTO aluno = alunoService.findByRa(ra);
+        return ResponseEntity.ok(aluno);
     }
+
 }

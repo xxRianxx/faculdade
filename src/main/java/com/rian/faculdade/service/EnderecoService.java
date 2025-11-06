@@ -4,16 +4,13 @@ import com.rian.faculdade.Dtos.EnderecoDTO;
 import com.rian.faculdade.entity.EnderecoEntity;
 import com.rian.faculdade.repository.EnderecoRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EnderecoService {
-
-    private final EnderecoRepository enderecoRepository;
-
-    public EnderecoService(EnderecoRepository enderecoRepository) {
-        this.enderecoRepository = enderecoRepository;
-    }
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     @Transactional
     public EnderecoEntity create(EnderecoDTO enderecoDTO) {

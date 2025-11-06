@@ -24,7 +24,7 @@ public class UsuarioService {
         u.setSenha(encoder.encode(dto.getSenha()));
 
         // Definindo status padrão para não quebrar o NOT NULL
-        u.setStatus("ATIVO"); // ou o valor que fizer sentido no seu projeto
+        u.setStatus("ATIVO");
 
         return repo.save(u);
     }

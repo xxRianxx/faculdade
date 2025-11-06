@@ -2,60 +2,43 @@ package com.rian.faculdade.service;
 
 import com.rian.faculdade.Dtos.AlunoCreateDTO;
 import com.rian.faculdade.Dtos.AlunoDTO;
-import com.rian.faculdade.Dtos.EnderecoDTO;
 import com.rian.faculdade.entity.AlunoEntity;
-import com.rian.faculdade.entity.EnderecoEntity;
 import com.rian.faculdade.entity.PessoaEntity;
 import com.rian.faculdade.entity.UsuarioEntity;
 import com.rian.faculdade.repository.AlunoRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AlunoService {
 
-    private final AlunoRepository alunoRepo;
+    @Autowired
+    private AlunoRepository alunoRepo;
 
-    public AlunoService(AlunoRepository alunoRepo) {
-        this.alunoRepo = alunoRepo;
-    }
+    @Autowired
+    private PessoaService pessoaService;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Transactional
     public AlunoDTO create(AlunoCreateDTO dto) {
-        // Pessoa
-        PessoaEntity pessoa = new PessoaEntity();
-        pessoa.setNome(dto.getPessoa().getNome());
-        pessoa.setCpf(dto.getPessoa().getCpf());
-        pessoa.setDataNascimento(dto.getPessoa().getDataNascimento());
+        // Cria a pessoa (PessoaService cuida do endereço e validações)
+        PessoaEntity pessoa = pessoaService.create(dto.getPessoa());
 
-        // Endereço
-        if (dto.getPessoa().getEndereco() != null) {
-            EnderecoDTO eDto = dto.getPessoa().getEndereco();
-            EnderecoEntity endereco = new EnderecoEntity();
-            endereco.setLogradouro(eDto.getLogradouro());
-            endereco.setCidade(eDto.getCidade());
-            endereco.setNumero(eDto.getNumero());
-            endereco.setComplemento(eDto.getComplemento());
-            endereco.setEstado(eDto.getEstado());
-            endereco.setBairro(eDto.getBairro());
-            pessoa.setEndereco(endereco);
-        }
+        // Cria usuário
+        UsuarioEntity usuario = usuarioService.create(dto.getUsuario());
 
-        // Usuário
-        UsuarioEntity usuario = new UsuarioEntity();
-        usuario.setEmail(dto.getUsuario().getEmail());
-        usuario.setSenha(dto.getUsuario().getSenha());
-        usuario.setStatus("ATIVO");
-
-        // Aluno
+        // Cria aluno
         AlunoEntity aluno = new AlunoEntity();
         aluno.setPessoa(pessoa);
         aluno.setUsuario(usuario);
         aluno.setRa(generateRa());
 
-        // Salva tudo (cascade salva pessoa, endereço e usuário)
+        // Salva aluno (cascade salva usuário se configurado na entidade)
         AlunoEntity saved = alunoRepo.save(aluno);
 
+        // Retorna DTO
         return mapperToDto(saved);
     }
 
@@ -70,5 +53,12 @@ public class AlunoService {
         dto.setNomePessoa(aluno.getPessoa().getNome());
         dto.setEmailUsuario(aluno.getUsuario().getEmail());
         return dto;
+    }
+
+    @Transactional
+    public AlunoDTO findByRa(String ra) {
+        return alunoRepo.findByRa(ra)
+                .map(this::mapperToDto) // converte AlunoEntity para DTO
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
     }
 }
