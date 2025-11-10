@@ -15,7 +15,8 @@ public class AlunoService {
 
     @Autowired
     private AlunoRepository alunoRepo;
-
+    @Autowired
+    PerfilUsuarioService perfilUsuarioService;
     @Autowired
     private PessoaService pessoaService;
     @Autowired
@@ -33,7 +34,8 @@ public class AlunoService {
 
         // Cria o usuário
         UsuarioEntity usuario = usuarioService.create(dto.getUsuario());
-
+        // Associa o perfil de ALUNO
+        perfilUsuarioService.atribuirPerfil(usuario, "ALUNO");
         // Cria aluno
         AlunoEntity aluno = new AlunoEntity();
         aluno.setPessoa(pessoa);

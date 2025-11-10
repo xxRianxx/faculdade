@@ -9,11 +9,23 @@ public class PerfilUsuarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
-    @JoinColumn(name = "id_perfil")
+    @JoinColumn(name = "id_perfil", nullable = false)
     private PerfilEntity perfil;
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private UsuarioEntity usuario;
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public PerfilEntity getPerfil() {
         return perfil;
